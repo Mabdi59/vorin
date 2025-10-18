@@ -44,6 +44,33 @@ VORIN is a modern, full-stack tournament management platform built with React, S
 
 ## Getting Started
 
+### Quick Start with Scripts
+
+The easiest way to start the application is using the provided startup scripts:
+
+1. **Start PostgreSQL Database**
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Start Backend** (in a new terminal)
+   ```bash
+   cd backend
+   ./start.sh
+   ```
+
+3. **Start Frontend** (in another new terminal)
+   ```bash
+   cd frontend
+   ./start.sh
+   ```
+
+4. **Access the Application**
+   
+   Open your browser to `http://localhost:5173`
+
+### Manual Setup
+
 ### 1. Clone the Repository
 
 ```bash
@@ -82,9 +109,27 @@ The frontend will start on `http://localhost:5173`.
 
 Open your browser and navigate to `http://localhost:5173`.
 
-**Default Test Account** (create via signup page):
-- Username: admin
-- Password: admin123
+**Create an Account**:
+Use the signup page to create a new account, or use the sample data script to populate the database with test data (see [Sample Data](#sample-data) section).
+
+## Sample Data
+
+To quickly test the application with sample data, you can run the provided SQL script:
+
+```bash
+# Ensure PostgreSQL is running and the application has created the schema
+# Then load the sample data:
+docker exec -i vorin-postgres psql -U vorin_user -d vorin < backend/src/main/resources/sample-data.sql
+```
+
+This will create:
+- 3 sample users (password for all: `password123`)
+  - `admin` / `admin@vorin.com` (with ROLE_ADMIN)
+  - `organizer1` / `organizer1@vorin.com`
+  - `organizer2` / `organizer2@vorin.com`
+- 3 venues
+- 2 tournaments with divisions and teams
+- Sample matches for testing
 
 ## API Endpoints
 
