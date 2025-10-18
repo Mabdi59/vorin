@@ -19,7 +19,7 @@ VORIN is a modern, full-stack tournament management platform built with React, S
 ## Technology Stack
 
 ### Backend
-- **Java 21**: Latest LTS version of Java
+- **Java 17**: LTS version of Java (compatible with Java 21)
 - **Spring Boot 3.2.0**: Modern Spring framework
 - **Spring Security**: JWT authentication
 - **Spring Data JPA**: Database persistence
@@ -37,7 +37,7 @@ VORIN is a modern, full-stack tournament management platform built with React, S
 
 ## Prerequisites
 
-- Java 21 or higher
+- Java 17 or higher (Java 21 recommended for production)
 - Node.js 18 or higher
 - Docker and Docker Compose (for PostgreSQL)
 - Maven 3.6 or higher
@@ -204,6 +204,28 @@ cors.allowed-origins=http://localhost:5173
 ### Frontend Configuration
 
 The frontend uses Vite's proxy configuration in `vite.config.ts` to connect to the backend.
+
+## Security
+
+### Authentication
+- JWT-based authentication for stateless API
+- Passwords are hashed using BCrypt
+- Token expiration is configurable (default: 24 hours)
+
+### Security Considerations
+- **CSRF Protection**: Disabled for REST API endpoints as the application uses JWT token-based authentication instead of session cookies. CSRF attacks require session cookies to be effective.
+- **CORS**: Configured to allow specific origins only (default: http://localhost:5173 for development)
+- **SQL Injection**: Protected by using JPA/Hibernate parameterized queries
+- **XSS**: Frontend uses React which escapes output by default
+
+### Production Deployment Recommendations
+1. Change the JWT secret to a strong, random value
+2. Use HTTPS for all communications
+3. Configure CORS to allow only your production domain
+4. Use environment variables for sensitive configuration
+5. Set appropriate database user permissions
+6. Enable rate limiting for authentication endpoints
+7. Implement proper logging and monitoring
 
 ## License
 

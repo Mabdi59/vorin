@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Tournament, TournamentStatus } from '../types';
+import { Tournament } from '../types';
 import { tournamentService } from '../services/dataService';
 import './Dashboard.css';
 
